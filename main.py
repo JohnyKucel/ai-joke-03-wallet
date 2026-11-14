@@ -2,8 +2,13 @@ import os
 
 JOKE = "Opening my wallet is like cutting an onion \u2014 instant tears."
 
+def _output_dir():
+    raw = os.environ.get("MAKEFUN_OUTPUT_DIR", "")
+    return raw.strip() or "/output"
+
+
 def main():
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    out_dir = _output_dir()
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
         f.write(JOKE + "\n")
